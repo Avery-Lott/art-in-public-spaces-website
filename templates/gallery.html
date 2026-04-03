@@ -2,4 +2,103 @@
 {% block title %}Gallery{% endblock %}
 {% block content %}
 
+<!-- ═══════ GALLERY PAGE ═══════ -->
+<div id="page-gallery" class="page">
+  <div class="gallery-header">
+    <h1>Gallery</h1>
+    <p>A visual record of our public art projects — murals, installations, and community interventions across the city.</p>
+  </div>
+  <div class="gallery-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Murals</button>
+    <button class="filter-btn">Installations</button>
+    <button class="filter-btn">Pop-ups</button>
+  </div>
+  <div class="gallery-grid">
+    <!-- Card 1 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(0,188,212,0.12), rgba(233,30,99,0.12));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="10" y="10" width="25" height="25" rx="4" fill="#00BCD4" opacity="0.6"/><rect x="30" y="30" width="25" height="25" rx="4" fill="#E91E63" opacity="0.5"/><circle cx="55" cy="20" r="12" fill="#FFC107" opacity="0.5"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--cyan);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--cyan);">Mural</div>
+        <h3>Chromatic Convergence</h3>
+        <p class="card-meta">Downtown District · Spring 2025</p>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(233,30,99,0.12), rgba(255,193,7,0.12));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><polygon points="40,5 75,65 5,65" fill="#E91E63" opacity="0.5"/><circle cx="40" cy="45" r="18" fill="#FFC107" opacity="0.4"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--magenta);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--magenta);">Installation</div>
+        <h3>Signal & Noise</h3>
+        <p class="card-meta">Riverside Park · Winter 2024</p>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(255,193,7,0.12), rgba(0,188,212,0.12));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="15" y="15" width="50" height="50" rx="25" fill="#FFC107" opacity="0.5"/><rect x="25" y="25" width="30" height="30" rx="6" fill="#00BCD4" opacity="0.4"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--yellow);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: #F57F17;">Pop-up</div>
+        <h3>Urban Canvas</h3>
+        <p class="card-meta">Market Square · Fall 2024</p>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(33,33,33,0.06), rgba(0,188,212,0.1));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><line x1="10" y1="70" x2="70" y2="10" stroke="#212121" stroke-width="3" opacity="0.4"/><circle cx="25" cy="55" r="10" fill="#00BCD4" opacity="0.5"/><circle cx="55" cy="25" r="10" fill="#E91E63" opacity="0.5"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--key);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--gray-600);">Mural</div>
+        <h3>Line of Sight</h3>
+        <p class="card-meta">Arts District · Summer 2024</p>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(233,30,99,0.1), rgba(33,33,33,0.06));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="5" y="30" width="70" height="20" rx="10" fill="#E91E63" opacity="0.4"/><rect x="30" y="5" width="20" height="70" rx="10" fill="#FFC107" opacity="0.4"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--magenta);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--magenta);">Installation</div>
+        <h3>Crossroads</h3>
+        <p class="card-meta">Central Station · Spring 2024</p>
+      </div>
+    </div>
+    <!-- Card 6 -->
+    <div class="gallery-card">
+      <div class="gallery-img" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(255,193,7,0.1));">
+        <div class="placeholder-art">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="25" cy="40" r="18" fill="#00BCD4" opacity="0.4"/><circle cx="55" cy="40" r="18" fill="#FFC107" opacity="0.4"/><circle cx="40" cy="25" r="18" fill="#E91E63" opacity="0.3"/></svg>
+        </div>
+        <div class="color-bar" style="background: var(--cyan);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--cyan);">Pop-up</div>
+        <h3>Spectrum</h3>
+        <p class="card-meta">Community Center · Winter 2023</p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

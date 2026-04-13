@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Art in Public Spaces — Home{% endblock %}
+
+{% block content %}
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob c"></div>
+    <div class="blob m"></div>
+    <div class="blob y"></div>
+  </div>
+
+  <div class="reg-mark top-right">
+    <svg class="registration-cross" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="16" stroke="#BDBDBD" stroke-width="0.5"/>
+      <line x1="20" y1="2" x2="20" y2="38" stroke="#BDBDBD" stroke-width="0.5"/>
+      <line x1="2" y1="20" x2="38" y2="20" stroke="#BDBDBD" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="reg-mark bottom-left">
+    <svg class="registration-cross" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="16" stroke="#BDBDBD" stroke-width="0.5"/>
+      <line x1="20" y1="2" x2="20" y2="38" stroke="#BDBDBD" stroke-width="0.5"/>
+      <line x1="2" y1="20" x2="38" y2="20" stroke="#BDBDBD" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="c">C</span><span class="m">M</span><span class="y">Y</span><span class="k">K</span> — Est. 2024
+    </div>
+    <h1>Art belongs to <em>everyone.</em></h1>
+    <p>We are a collective of artists, designers, and dreamers transforming public spaces through bold, community-driven art installations.</p>
+    <div class="hero-cta">
+      <a href="{{ url_for('gallery') }}" class="btn btn-primary">View Our Work</a>
+      <a href="{{ url_for('about') }}" class="btn btn-outline">Meet the Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section class="stats-bar">
+  {% for stat in stats %}
+  <div class="stat-item {{ stat.color }}">
+    <div class="number">{{ stat.number }}</div>
+    <div class="label">{{ stat.label }}</div>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- ─── MISSION ─── -->
+<section class="mission">
+  <div class="mission-left">
+    <h2>Our mission is to make art <em>visible, accessible, and alive</em> in everyday spaces.</h2>
+    <p>We believe public art sparks conversation, strengthens communities, and transforms the way people experience their environment. Through murals, installations, and pop-up exhibitions, we bring creative energy to the places that need it most.</p>
+  </div>
+  <div class="cmyk-pillars">
+    {% for pillar in pillars %}
+    <div class="pillar {{ pillar.color }}">
+      <h4>{{ pillar.title }}</h4>
+      <p>{{ pillar.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

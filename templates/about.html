@@ -1,85 +1,62 @@
-{% extends "layout.html" %}
-{% block title %}About Us{% endblock %}
+{% extends "base.html" %}
+{% block title %}About Us — Art in Public Spaces{% endblock %}
+
 {% block content %}
-
-<!-- ═══════ ABOUT PAGE ═══════ -->
-<div id="page-about" class="page">
-  <div class="about-header">
-    <h1>About Us</h1>
-    <p>Meet the team behind Art in Public Spaces — a passionate group of creatives dedicated to bringing art out of galleries and into the world.</p>
-  </div>
-
-  <section class="team-section">
-    <h2>Team Leads</h2>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-avatar">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#00BCD4" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#00BCD4" opacity="0.3"/></svg>
-        </div>
-        <div class="team-info">
-          <h3>Jordan Rivera</h3>
-          <div class="role">President</div>
-          <p class="bio">MFA in Public Art. Led 15+ installations across the region. Passionate about community-driven design and placemaking.</p>
-          <a href="mailto:jordan@artinpublic.org" class="contact-link">jordan@artinpublic.org →</a>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#E91E63" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#E91E63" opacity="0.3"/></svg>
-        </div>
-        <div class="team-info">
-          <h3>Mika Chen</h3>
-          <div class="role">Creative Director</div>
-          <p class="bio">Background in graphic design and typography. Oversees all visual identity and ensures every project pushes creative boundaries.</p>
-          <a href="mailto:mika@artinpublic.org" class="contact-link">mika@artinpublic.org →</a>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#FFC107" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#FFC107" opacity="0.3"/></svg>
-        </div>
-        <div class="team-info">
-          <h3>Sam Okafor</h3>
-          <div class="role">Outreach Lead</div>
-          <p class="bio">Community organizer with a talent for building partnerships. Connects the club with neighborhoods, schools, and local businesses.</p>
-          <a href="mailto:sam@artinpublic.org" class="contact-link">sam@artinpublic.org →</a>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#212121" opacity="0.35"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#212121" opacity="0.2"/></svg>
-        </div>
-        <div class="team-info">
-          <h3>Alex Kowalski</h3>
-          <div class="role">Operations</div>
-          <p class="bio">Keeps the gears turning — logistics, permits, budgets, and timelines. Ensures every project runs smoothly from concept to completion.</p>
-          <a href="mailto:alex@artinpublic.org" class="contact-link">alex@artinpublic.org →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact-section">
-    <div class="contact-card">
-      <div>
-        <h2>Get in Touch</h2>
-        <p>Have a wall that needs color? A space that needs life? We'd love to hear from you. Reach out to collaborate, volunteer, or just say hello.</p>
-      </div>
-      <div class="contact-details">
-        <div class="contact-item">
-          <div class="contact-icon">✉</div>
-          <div><strong>Email</strong><br>hello@artinpublicspaces.org</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div><strong>Studio</strong><br>142 Color Lane, Arts District</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📱</div>
-          <div><strong>Social</strong><br>@artinpublicspaces</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="about-header">
+  <h1>About Us</h1>
+  <p>Meet the team behind Art in Public Spaces — a passionate group of creatives dedicated to bringing art out of galleries and into the world.</p>
 </div>
+
+<!-- ─── TEAM LEADS ─── -->
+<section class="team-section">
+  <h2>Team Leads</h2>
+  <div class="team-grid">
+    {% for member in team %}
+    <div class="team-card {{ member.color }}">
+      <div class="team-avatar">
+        {# Placeholder avatar — replace with <img> for real photos #}
+        {% if member.color == 'cyan' %}
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#00BCD4" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#00BCD4" opacity="0.3"/></svg>
+        {% elif member.color == 'magenta' %}
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#E91E63" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#E91E63" opacity="0.3"/></svg>
+        {% elif member.color == 'yellow' %}
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#FFC107" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#FFC107" opacity="0.3"/></svg>
+        {% else %}
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#212121" opacity="0.35"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#212121" opacity="0.2"/></svg>
+        {% endif %}
+      </div>
+      <div class="team-info">
+        <h3>{{ member.name }}</h3>
+        <div class="role">{{ member.role }}</div>
+        <p class="bio">{{ member.bio }}</p>
+        <a href="mailto:{{ member.email }}" class="contact-link">{{ member.email }} →</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section">
+  <div class="contact-card">
+    <div>
+      <h2>Get in Touch</h2>
+      <p>Have a wall that needs color? A space that needs life? We'd love to hear from you. Reach out to collaborate, volunteer, or just say hello.</p>
+    </div>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div><strong>Email</strong><br>{{ contact.email }}</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div><strong>Studio</strong><br>{{ contact.address }}</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div><strong>Social</strong><br>{{ contact.social }}</div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

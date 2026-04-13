@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Art in Public Spaces{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <!-- ─── NAVIGATION ─── -->
+  <nav>
+    <a href="{{ url_for('home') }}" class="nav-logo">
+      <div class="cmyk-dots">
+        <span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span>
+      </div>
+      Art in Public Spaces
+    </a>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}"     class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
+      <a href="{{ url_for('gallery') }}"  class="{% if request.endpoint == 'gallery' %}active{% endif %}">Gallery</a>
+      <a href="{{ url_for('about') }}"    class="{% if request.endpoint == 'about' %}active{% endif %}">About Us</a>
+      <a href="{{ url_for('calendar') }}" class="{% if request.endpoint == 'calendar' %}active{% endif %}">Calendar</a>
+    </div>
+  </nav>
+
+  <!-- ─── PAGE CONTENT ─── -->
+  <main class="page-wrapper">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-left">&copy; 2026 Art in Public Spaces</div>
+    <div class="cmyk-bar">
+      <span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

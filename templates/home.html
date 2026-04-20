@@ -27,10 +27,15 @@
 
   <div class="hero-content">
     <div class="hero-tag">
-      <span class="c">C</span><span class="m">M</span><span class="y">Y</span><span class="k">K</span> — Est. 2024
+      <span class="c">Art </span>
+      <span class="m">in </span>
+      <span class="y">Public </span>
+      <span class="k">Spaces </span> — Est. 2024
     </div>
-    <h1>Art belongs to <em>everyone.</em></h1>
-    <p>We are a collective of artists, designers, and dreamers transforming public spaces through bold, community-driven art installations.</p>
+    <h1>Bringing art to <em>everyone</em>.</h1>
+    <p>Our team is dedicated to bringing cutting-edge public art to CU Boulder.
+      We're devoted to enriching lives through the process of creating and
+      experiencing art in public spaces around campus.</p>
     <div class="hero-cta">
       <a href="{{ url_for('gallery') }}" class="btn btn-primary">View Our Work</a>
       <a href="{{ url_for('about') }}" class="btn btn-outline">Meet the Team</a>
@@ -42,7 +47,7 @@
 <section class="stats-bar">
   {% for stat in stats %}
   <div class="stat-item {{ stat.color }}">
-    <div class="number">{{ stat.number }}</div>
+    <div class="fact-label">{{ stat.fact }}</div>
     <div class="label">{{ stat.label }}</div>
   </div>
   {% endfor %}
@@ -51,8 +56,18 @@
 <!-- ─── MISSION ─── -->
 <section class="mission">
   <div class="mission-left">
-    <h2>Our mission is to make art <em>visible, accessible, and alive</em> in everyday spaces.</h2>
-    <p>We believe public art sparks conversation, strengthens communities, and transforms the way people experience their environment. Through murals, installations, and pop-up exhibitions, we bring creative energy to the places that need it most.</p>
+    <h2>
+      Our mission is to bring together students, staff, and faculty across
+      disciplines and work with professional artists, designers, and
+      engineers to bring <em>cutting-edge</em> art to public spaces
+      on the CU Boulder campus.
+    </h2>
+    <p>
+      By creating art in public spaces throughout the CU Boulder Campus,
+      we will engage students, faculty, staff, and campus visitors with
+      an enriching and educational experience that will create dialogue,
+      community, and understanding about the power of art and the creative process.
+    </p>
   </div>
   <div class="cmyk-pillars">
     {% for pillar in pillars %}

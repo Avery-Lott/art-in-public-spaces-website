@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 
 app = Flask(__name__)
 
@@ -6,92 +6,92 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     stats = [
-        {"number": "24", "label": "Projects", "color": "cyan"},
-        {"number": "12", "label": "Artists", "color": "magenta"},
-        {"number": "8", "label": "Cities", "color": "yellow"},
-        {"number": "3K+", "label": "Community", "color": "key"},
+        {"fact": "Color Moves You Kindly", "label": "Our Project", "color": "cyan"},
+        {"fact": "5 Artists", "label": "Our Team", "color": "magenta"},
+        {"fact": "CU Boulder", "label": "Our Campus", "color": "yellow"},
     ]
     pillars = [
         {
             "letter": "C",
-            "title": "Create",
-            "desc": "We design and produce original artworks tailored to each site and community.",
+            "title": "Construct",
+            "desc": "We create original designs that become full-sized art installations.",
             "color": "cyan",
         },
         {
             "letter": "M",
-            "title": "Mobilize",
-            "desc": "We bring together artists, volunteers, and partners to make projects happen.",
+            "title": "Motivate",
+            "desc": "We bring together students, staff, and faculty to create new works.",
             "color": "magenta",
         },
         {
             "letter": "Y",
             "title": "Yield",
-            "desc": "We deliver lasting impact\u2009—\u2009art that endures and inspires long after installation.",
+            "desc": "We deliver art to public spaces around Boulder.",
             "color": "yellow",
         },
         {
             "letter": "K",
-            "title": "Kindle",
-            "desc": "We ignite creativity in young artists through workshops and mentorship.",
+            "title": "Kinetic",
+            "desc": "We are always moving to bring artistic life to our community.",
             "color": "key",
         },
     ]
     return render_template("home.html", stats=stats, pillars=pillars)
 
+def get_projects():
+    return [
+        {
+            "id": "color_moves_you_kindly",
+            "image": "../static/img/CMYK.png",
+            "title": "Color Moves You Kindly",
+            "category": "Installation",
+            "location": "Location TBD",
+            "season": "Spring 2026",
+            "color": "magenta",
+            "filter": "installations",
+            "shortdesc": "<em>Color Moves You Kindly</em> is a portable public art installation that brings light, sound, "
+                         "and community into dialogue. The work consists of three interlocking acrylic panels—cyan, "
+                         "magenta, and yellow—that shift and transform with the sun’s movement. As daylight filters "
+                         "through the panels, transparent overlaps create ever-changing fields of color, producing a "
+                         "kinetic visual experience that evolves depending on the viewer’s perspective...",
+            "description": "<h2><em>Color Moves You Kindly</em> is a portable public art installation that brings light, sound, "
+                           "and community into dialogue.</h2><p>The work consists of three interlocking acrylic panels—cyan, "
+                           "magenta, and yellow—that shift and transform with the sun’s movement. As daylight filters "
+                           "through the panels, transparent overlaps create ever-changing fields of color, producing a "
+                           "kinetic visual experience that evolves depending on the viewer’s perspective. </p> "
+                           "<p>Complementing the light, three integrated seats invite participants to become co-creators of "
+                           "the piece. Motion sensors beneath each seat trigger ambient chords that layer and harmonize as more "
+                           "people gather. A final, resonant chord is activated only when all three seats are filled, "
+                           "symbolizing collaboration and collective presence. In this way, the sculpture is not fully "
+                           "realized until the community activates it—turning public seating into a shared, immersive artwork. </p>"
+                           "<p>The installation contributes to Boulder’s <em>Experiments in Public Art</em> program by offering a"
+                           " mobile, lightweight work that prioritizes experience over permanence. Its portability allows it to appear "
+                           "in diverse contexts across the city, from parks to plazas, ensuring broad accessibility. The work "
+                           "fosters moments of pause and connection, carving out an “ethereal pocket” of color and sound in the"
+                           " midst of Boulder’s urban bustle.</p>"
+                           "<p> Ultimately, this work aims to enrich Boulder’s cultural landscape "
+                           "by offering a living, participatory artwork that celebrates creativity, collaboration, and the city’s "
+                           "unique balance of natural beauty and technological ingenuity. </p>"
+        },
+    ]
+@app.route("/project/<pid>")
+def project(pid):
+    projects = get_projects()
+
+    focusedProject = next(
+        (p for p in projects if p["id"] == pid),
+        None
+    )
+
+    if not focusedProject:
+        abort(404)
+
+    return render_template("project.html", project=focusedProject)
+
 
 @app.route("/gallery")
 def gallery():
-    projects = [
-        {
-            "title": "Chromatic Convergence",
-            "category": "Mural",
-            "location": "Downtown District",
-            "season": "Spring 2025",
-            "color": "cyan",
-            "filter": "murals",
-        },
-        {
-            "title": "Signal & Noise",
-            "category": "Installation",
-            "location": "Riverside Park",
-            "season": "Winter 2024",
-            "color": "magenta",
-            "filter": "installations",
-        },
-        {
-            "title": "Urban Canvas",
-            "category": "Pop-up",
-            "location": "Market Square",
-            "season": "Fall 2024",
-            "color": "yellow",
-            "filter": "popups",
-        },
-        {
-            "title": "Line of Sight",
-            "category": "Mural",
-            "location": "Arts District",
-            "season": "Summer 2024",
-            "color": "key",
-            "filter": "murals",
-        },
-        {
-            "title": "Crossroads",
-            "category": "Installation",
-            "location": "Central Station",
-            "season": "Spring 2024",
-            "color": "magenta",
-            "filter": "installations",
-        },
-        {
-            "title": "Spectrum",
-            "category": "Pop-up",
-            "location": "Community Center",
-            "season": "Winter 2023",
-            "color": "cyan",
-            "filter": "popups",
-        },
-    ]
+    projects = get_projects()
     return render_template("gallery.html", projects=projects)
 
 
@@ -99,38 +99,41 @@ def gallery():
 def about():
     team = [
         {
-            "name": "Jordan Rivera",
-            "role": "President",
-            "bio": "MFA in Public Art. Led 15+ installations across the region. Passionate about community-driven design and placemaking.",
-            "email": "jordan@artinpublic.org",
+            "headshot": "../static/img/aps_mowgli.jpg",
+            "name": "Mowgli Gunn",
+            "role": "Founder, VP",
+            "bio": "Boulder, CO.",
             "color": "cyan",
+            "email": "mowgli.gunn@colorado.edu"
         },
         {
-            "name": "Mika Chen",
-            "role": "Creative Director",
-            "bio": "Background in graphic design and typography. Oversees all visual identity and ensures every project pushes creative boundaries.",
-            "email": "mika@artinpublic.org",
+            "headshot": "none",
+            "name": "Polly Torian",
+            "role": "President",
+            "bio": "Club President",
             "color": "magenta",
+            "email": "polly.torian@colorado.edu"
         },
         {
-            "name": "Sam Okafor",
-            "role": "Outreach Lead",
-            "bio": "Community organizer with a talent for building partnerships. Connects the club with neighborhoods, schools, and local businesses.",
-            "email": "sam@artinpublic.org",
+            "headshot": "../static/img/marshall_aps.png",
+            "name": "Marshall Drook",
+            "role": "Secretary",
+            "bio": "Club Secretary",
+            "email": "marshall.drook@colorado.edu",
             "color": "yellow",
         },
         {
-            "name": "Alex Kowalski",
-            "role": "Operations",
-            "bio": "Keeps the gears turning\u2009—\u2009logistics, permits, budgets, and timelines. Ensures every project runs smoothly from concept to completion.",
-            "email": "alex@artinpublic.org",
+            "headshot": "../static/img/aps_group.jpg",
+            "name": "The APS Group",
+            "role": "2025",
+            "bio": "New Student Organization of the year",
+            "email": "none",
             "color": "key",
         },
     ]
     contact = {
-        "email": "hello@artinpublicspaces.org",
-        "address": "142 Color Lane, Arts District",
-        "social": "@artinpublicspaces",
+        "email": "aps@colorado.edu",
+        "address": "Often in the UMC, room number varies",
     }
     return render_template("about.html", team=team, contact=contact)
 
@@ -139,50 +142,19 @@ def about():
 def calendar():
     events = [
         {
-            "day": 5,
+            "reoccurring": True,
+            "day": 3,
+            "weekday": 5,
             "month": "Apr",
-            "title": "Spring Mural Kickoff",
-            "desc": "Community mural painting day at Riverside Park",
-            "time": "10:00 AM",
+            "js_month":3,
+            "year": 2026,
+            "title": "Club Meeting",
+            "desc": "Regular Club Meeting",
+            "time": "6:00 PM",
             "color": "cyan",
         },
-        {
-            "day": 12,
-            "month": "Apr",
-            "title": "Artist Workshop: Screen Printing",
-            "desc": "Learn CMYK screen printing techniques with Mika Chen",
-            "time": "2:00 PM",
-            "color": "magenta",
-        },
-        {
-            "day": 19,
-            "month": "Apr",
-            "title": "Pop-Up Gallery: Market Square",
-            "desc": "One-day outdoor exhibition featuring new member work",
-            "time": "11:00 AM",
-            "color": "yellow",
-        },
-        {
-            "day": 26,
-            "month": "Apr",
-            "title": "Monthly Meeting & Critique",
-            "desc": "Review ongoing projects and plan May installations",
-            "time": "6:00 PM",
-            "color": "key",
-        },
     ]
-    # Calendar event data for JS (month is 0-indexed for JS Date)
-    cal_events = [
-        {"day": 5, "month": 3, "year": 2026, "title": "Mural Kickoff", "color": "cyan"},
-        {"day": 12, "month": 3, "year": 2026, "title": "Screen Printing", "color": "magenta"},
-        {"day": 19, "month": 3, "year": 2026, "title": "Pop-Up Gallery", "color": "yellow"},
-        {"day": 26, "month": 3, "year": 2026, "title": "Monthly Meeting", "color": "key"},
-        {"day": 3, "month": 4, "year": 2026, "title": "Mural Jam", "color": "cyan"},
-        {"day": 10, "month": 4, "year": 2026, "title": "Youth Workshop", "color": "magenta"},
-        {"day": 17, "month": 4, "year": 2026, "title": "Gallery Night", "color": "yellow"},
-        {"day": 24, "month": 4, "year": 2026, "title": "Planning Session", "color": "key"},
-    ]
-    return render_template("calendar.html", events=events, cal_events=cal_events)
+    return render_template("calendar.html", events=events)
 
 
 if __name__ == "__main__":

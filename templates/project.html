@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}FocusProject — Art in Public Spaces{% endblock %}
+
+{% block content %}
+<div class="project-header">
+  <h1>{{ project.title }}</h1>
+  <p>{{ project.category }} · {{ project.location }} · {{ project.season }}</p>
+  <div class="project-color-bar" style="background: var(--{{ project.color }});"></div>
+</div>
+
+<section class="project">
+  <div class="project-left">
+      {{ project.description | safe}}
+  </div>
+  <div class="project-image">
+      {% if project.image == 'none' %}
+        <div style="background: linear-gradient(135deg,
+          {% if project.color == 'cyan' %}rgba(0,188,212,0.12), rgba(233,30,99,0.12)
+          {% elif project.color == 'magenta' %}rgba(233,30,99,0.12), rgba(255,193,7,0.12)
+          {% elif project.color == 'yellow' %}rgba(255,193,7,0.12), rgba(0,188,212,0.12)
+          {% else %}rgba(33,33,33,0.06), rgba(0,188,212,0.1)
+          {% endif %});">
+        </div>
+    {% else %}
+        <img src="{{ url_for('static', filename=project.image) }}" class="fit-image">
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

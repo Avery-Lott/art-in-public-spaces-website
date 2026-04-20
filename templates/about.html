@@ -4,7 +4,8 @@
 {% block content %}
 <div class="about-header">
   <h1>About Us</h1>
-  <p>Meet the team behind Art in Public Spaces — a passionate group of creatives dedicated to bringing art out of galleries and into the world.</p>
+  <p>Meet the team behind Art in Public Spaces -- a growing group of
+    creators making the world a brighter place, one art piece at a time.</p>
 </div>
 
 <!-- ─── TEAM LEADS ─── -->
@@ -14,22 +15,27 @@
     {% for member in team %}
     <div class="team-card {{ member.color }}">
       <div class="team-avatar">
-        {# Placeholder avatar — replace with <img> for real photos #}
-        {% if member.color == 'cyan' %}
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#00BCD4" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#00BCD4" opacity="0.3"/></svg>
-        {% elif member.color == 'magenta' %}
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#E91E63" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#E91E63" opacity="0.3"/></svg>
-        {% elif member.color == 'yellow' %}
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#FFC107" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#FFC107" opacity="0.3"/></svg>
+        {% if member.headshot == 'none' %}
+          {% if member.color == 'cyan' %}
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#00BCD4" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#00BCD4" opacity="0.3"/></svg>
+          {% elif member.color == 'magenta' %}
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#E91E63" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#E91E63" opacity="0.3"/></svg>
+          {% elif member.color == 'yellow' %}
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#FFC107" opacity="0.5"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#FFC107" opacity="0.3"/></svg>
+          {% else %}
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#212121" opacity="0.35"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#212121" opacity="0.2"/></svg>
+          {% endif %}
         {% else %}
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="24" r="12" fill="#212121" opacity="0.35"/><ellipse cx="32" cy="52" rx="20" ry="12" fill="#212121" opacity="0.2"/></svg>
+          <img src="{{ url_for('static', filename=member.headshot) }}" class="fit-image">
         {% endif %}
       </div>
       <div class="team-info">
         <h3>{{ member.name }}</h3>
         <div class="role">{{ member.role }}</div>
         <p class="bio">{{ member.bio }}</p>
-        <a href="mailto:{{ member.email }}" class="contact-link">{{ member.email }} →</a>
+        {% if member.email != 'none' %}
+          <a href="mailto:{{ member.email }}" class="contact-link">{{ member.email }} →</a>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
@@ -41,7 +47,9 @@
   <div class="contact-card">
     <div>
       <h2>Get in Touch</h2>
-      <p>Have a wall that needs color? A space that needs life? We'd love to hear from you. Reach out to collaborate, volunteer, or just say hello.</p>
+      <p>Looking to join a club on campus or support art in our community?
+        We'd love to hear from you. Reach out to collaborate with us, join
+        the club, or just to say hello.</p>
     </div>
     <div class="contact-details">
       <div class="contact-item">
@@ -50,11 +58,7 @@
       </div>
       <div class="contact-item">
         <div class="contact-icon">📍</div>
-        <div><strong>Studio</strong><br>{{ contact.address }}</div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📱</div>
-        <div><strong>Social</strong><br>{{ contact.social }}</div>
+        <div><strong>Club Meeting Location</strong><br>{{ contact.address }}</div>
       </div>
     </div>
   </div>

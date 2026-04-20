@@ -1,11 +1,20 @@
 {% extends "base.html" %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+<script>
+  // Pass event data from Flask to JS and initialize
+  const eventList = {{ events | tojson }};
+  initCalendar(eventList);
+</script>
+{% endblock %}
+
 {% block title %}Calendar — Art in Public Spaces{% endblock %}
 
 {% block content %}
 <div class="calendar-header">
   <div>
     <h1>Calendar</h1>
-    <p>Upcoming events, workshops, and installations</p>
+    <p>Upcoming events/meetings</p>
   </div>
   <div class="month-nav">
     <button onclick="changeMonth(-1)">‹</button>
@@ -33,29 +42,6 @@
 <!-- ─── UPCOMING EVENTS ─── -->
 <section class="upcoming-section">
   <h2>Upcoming Events</h2>
-  <div class="event-list">
-    {% for event in events %}
-    <div class="event-row {{ event.color }}">
-      <div class="event-date-badge">
-        <div class="month-label">{{ event.month }}</div>
-        <div class="day-label">{{ event.day }}</div>
-      </div>
-      <div class="event-details">
-        <h3>{{ event.title }}</h3>
-        <p>{{ event.desc }}</p>
-      </div>
-      <div class="event-time">{{ event.time }}</div>
-    </div>
-    {% endfor %}
-  </div>
+  <div class="event-list" id="eventList"></div>
 </section>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
-<script>
-  // Pass event data from Flask to JS and initialize
-  const calEvents = {{ cal_events | tojson }};
-  initCalendar(calEvents);
-</script>
 {% endblock %}

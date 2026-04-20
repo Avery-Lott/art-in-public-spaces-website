@@ -4,45 +4,43 @@
 {% block content %}
 <div class="gallery-header">
   <h1>Gallery</h1>
-  <p>A visual record of our public art projects — murals, installations, and community interventions across the city.</p>
+  <p>A catalog containing our current and past public art projects.</p>
 </div>
 
 <div class="gallery-filters">
   <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="murals">Murals</button>
+  <!-- <button class="filter-btn" data-filter="murals">Murals</button>
   <button class="filter-btn" data-filter="installations">Installations</button>
-  <button class="filter-btn" data-filter="popups">Pop-ups</button>
+  <button class="filter-btn" data-filter="popups">Pop-ups</button> -->
 </div>
 
 <div class="gallery-grid">
   {% for project in projects %}
-  <div class="gallery-card" data-category="{{ project.filter }}">
-    <div class="gallery-img" style="background: linear-gradient(135deg,
-      {% if project.color == 'cyan' %}rgba(0,188,212,0.12), rgba(233,30,99,0.12)
-      {% elif project.color == 'magenta' %}rgba(233,30,99,0.12), rgba(255,193,7,0.12)
-      {% elif project.color == 'yellow' %}rgba(255,193,7,0.12), rgba(0,188,212,0.12)
-      {% else %}rgba(33,33,33,0.06), rgba(0,188,212,0.1)
-      {% endif %});">
-      <div class="placeholder-art">
-        {# Placeholder SVG artwork — replace with <img> tags for real project photos #}
-        {% if project.color == 'cyan' %}
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="10" y="10" width="25" height="25" rx="4" fill="#00BCD4" opacity="0.6"/><rect x="30" y="30" width="25" height="25" rx="4" fill="#E91E63" opacity="0.5"/><circle cx="55" cy="20" r="12" fill="#FFC107" opacity="0.5"/></svg>
-        {% elif project.color == 'magenta' %}
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><polygon points="40,5 75,65 5,65" fill="#E91E63" opacity="0.5"/><circle cx="40" cy="45" r="18" fill="#FFC107" opacity="0.4"/></svg>
-        {% elif project.color == 'yellow' %}
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="15" y="15" width="50" height="50" rx="25" fill="#FFC107" opacity="0.5"/><rect x="25" y="25" width="30" height="30" rx="6" fill="#00BCD4" opacity="0.4"/></svg>
+  <a href="{{ url_for('project', pid=project.id) }}"
+    class="{% if request.endpoint == 'project' %}active{% endif %}">
+    <div class="gallery-card" data-category="{{ project.filter }}">
+      <div class="gallery-img">
+        {% if project.image == 'none' %}
+            <div style="background: linear-gradient(135deg,
+              {% if project.color == 'cyan' %}rgba(0,188,212,0.12), rgba(233,30,99,0.12)
+              {% elif project.color == 'magenta' %}rgba(233,30,99,0.12), rgba(255,193,7,0.12)
+              {% elif project.color == 'yellow' %}rgba(255,193,7,0.12), rgba(0,188,212,0.12)
+              {% else %}rgba(33,33,33,0.06), rgba(0,188,212,0.1)
+              {% endif %});">
+            </div>
         {% else %}
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><line x1="10" y1="70" x2="70" y2="10" stroke="#212121" stroke-width="3" opacity="0.4"/><circle cx="25" cy="55" r="10" fill="#00BCD4" opacity="0.5"/><circle cx="55" cy="25" r="10" fill="#E91E63" opacity="0.5"/></svg>
+            <img src="{{ url_for('static', filename=project.image) }}" class="fit-image">
         {% endif %}
+        <div class="color-bar" style="background: var(--{{ project.color }});"></div>
       </div>
-      <div class="color-bar" style="background: var(--{{ project.color }});"></div>
+      <div class="card-info">
+        <div class="card-tag" style="color: var(--{{ project.color }});">{{ project.category }}</div>
+        <h3>{{ project.title }}</h3>
+        <p class="card-meta">{{ project.location }} · {{ project.season }}</p>
+        <p class="click-me">Click me to find out more about the project!</p>
+      </div>
     </div>
-    <div class="card-info">
-      <div class="card-tag" style="color: var(--{{ project.color }});">{{ project.category }}</div>
-      <h3>{{ project.title }}</h3>
-      <p class="card-meta">{{ project.location }} · {{ project.season }}</p>
-    </div>
-  </div>
+  </a>
   {% endfor %}
 </div>
 {% endblock %}
